@@ -197,8 +197,8 @@ class PullToRefreshNotificationState extends State<PullToRefreshNotification>
     final ThemeData theme = Theme.of(context);
     _valueColor = _positionController.drive(
       ColorTween(
-              begin: (widget.color ?? theme.accentColor).withOpacity(0.0),
-              end: (widget.color ?? theme.accentColor).withOpacity(1.0))
+              begin: (widget.color ?? theme.colorScheme.secondary).withOpacity(0.0),
+              end: (widget.color ?? theme.colorScheme.secondary).withOpacity(1.0))
           .chain(CurveTween(
               curve: const Interval(0.0, 1.0 / _kDragSizeFactorLimit))),
     );
@@ -322,7 +322,7 @@ class PullToRefreshNotificationState extends State<PullToRefreshNotification>
       return false;
     }
     if (_refreshIndicatorMode == PullToRefreshIndicatorMode.drag) {
-      notification.disallowGlow();
+      notification.disallowIndicator();
       return true;
     }
     return false;
@@ -531,7 +531,7 @@ class PullToRefreshNotificationState extends State<PullToRefreshNotification>
             return PullToRefreshCupertinoActivityIndicator(
               animating: showIndeterminateIndicator,
               radius: 15.0,
-              activeColor: widget.color ?? Theme.of(context).accentColor,
+              activeColor: widget.color ?? Theme.of(context).colorScheme.secondary,
             );
           } else {
             return RefreshProgressIndicator(
